@@ -22,6 +22,19 @@ if [[ -d dist ]]; then
 fi
 
 echo "fetching j2objc"
+
+# curl -OL https://github.com/google/j2objc/releases/download/${j2objc_version}/j2objc-${j2objc_version}.zip
+# unzip -o -q j2objc-${j2objc_version}.zip
+# mv j2objc-${j2objc_version} dist
+
+# Downloading the j2objc build from a fork because the original repository's releases were removed.
 curl -OL https://github.com/mirego/j2objc/releases/download/${j2objc_version}-mirego/j2objc-${j2objc_version}-mirego.zip
+
+# Unzipping the downloaded archive
 unzip -o -q j2objc-${j2objc_version}-mirego.zip
+
+# Moving the extracted folder to "dist"
 mv j2objc-${j2objc_version}-mirego dist
+
+# Copying only the libraries for the iPhoneOS platform into the lib folder
+cp -R dist/lib/iphoneos/* dist/lib/
